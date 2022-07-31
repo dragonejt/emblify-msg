@@ -1,0 +1,23 @@
+type Query {
+    activationSession(userID: Int): Session,
+    forgotPasswordSession(userID: Int): Session
+}
+
+type Mutation {
+    sendEmail_activation(userID: Int, username: String, email: String): MessageResponse,
+    sendEmail_forgotPassword(userID: Int, username: String, email: String): MessageResponse,
+}
+
+type MessageResponse {
+    status: Int!,
+    message: String,
+    details: String
+}
+
+type Session {
+    userID: Int!,
+    username: String!,
+    email: String!,
+    code: String!,
+    createdAt: String!
+}

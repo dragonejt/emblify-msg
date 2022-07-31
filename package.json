@@ -1,0 +1,27 @@
+{
+  "name": "emblify-msg",
+  "version": "1.0.0",
+  "description": "emails and push notifications for emblify",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dragonejt/emblify-msg.git"
+  },
+  "author": "dragonejt",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/dragonejt/emblify-msg/issues"
+  },
+  "homepage": "https://github.com/dragonejt/emblify-msg#readme",
+  "dependencies": {
+    "apollo-server": "^3.10.0",
+    "dotenv": "^16.0.1",
+    "graphql": "^15.8.0",
+    "mailgun.js": "^7.0.4",
+    "mongoose": "^6.4.6"
+  }
+}
