@@ -19,5 +19,5 @@ type Session {
     username: String!,
     email: String!,
     code: String!,
-    createdAt: String!
+    updatedAt: String!
 }

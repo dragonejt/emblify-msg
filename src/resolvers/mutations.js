@@ -9,9 +9,8 @@ const mailgun = new Mailgun(formData);
 const client = mailgun.client({ username: 'api', key: API_KEY });
 
 async function sendEmail_activation(parent, { userID, username, email }, context, info) {
-    const activationCode = Math.random().toString().substring(2, 8)
-
-    const session = await ActivationSession.findOneAndUpdate({ userID }, { username, email, code: activationCode }, { upsert: true })
+    const activationCode = Math.random().toString().substring(2, 8);
+    const session = await ActivationSession.findOneAndUpdate({ userID }, { username, email, code: activationCode }, { upsert: true });
 
     return await client.messages.create(DOMAIN, {
         from: "emblify <hello@emblify.me>",
@@ -25,4 +24,20 @@ async function sendEmail_activation(parent, { userID, username, email }, context
     })
 }
 
-module.exports = { sendEmail_activation };
+async function sendEmail_forgotPassword(parent, { userID, username, email }, context, info) {
+    const resetPasswordCode = Math.random().toString().substring(2, 8);
+    const session = await ForgotPasswordSession.findOneAndUpdate({ userID }, { username, email, code: resetPasswordCode }, { upsert: true });
+
+    return await client.messages.create(DOMAIN, {
+        from: "emblify <hello@emblify.me>",
+        to: email,
+        subject: "emblify forgot password",
+        template: "forgotpassword",
+        "t:variables": JSON.stringify({
+            user: username,
+            code: resetPasswordCode
+        })
+    })
+}
+
+module.exports = { sendEmail_activation, sendEmail_forgotPassword };
